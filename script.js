@@ -225,10 +225,15 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 4000);
     }
 
-    /* ---------------------------------------------------------------------
-       7. BLOSSOM SECTION — lotus blooms open on scroll down,
-          folds back pale (desaturated + collapsed) on scroll up
-    --------------------------------------------------------------------- */
+    /* ==========================================================================
+       BLOSSOM SECTION — lotus blooms open on scroll down,
+       folds back pale (desaturated + collapsed) on scroll up
+    ========================================================================== */
+
+    const blossomLotus = document.getElementById('blossomLotus');
+    const blossomFigure = document.getElementById('blossomFigure');
+
+    // reveal the blossom copy text (eyebrow, title, desc, button)
     const blossomCopyTl = gsap.timeline({
       scrollTrigger: {
         trigger: '#blossom',
@@ -237,66 +242,56 @@ document.addEventListener('DOMContentLoaded', () => {
       },
       defaults: { ease: 'power3.out' }
     });
+
     blossomCopyTl
       .fromTo('[data-anim="b-eyebrow"]', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: .6 }, 0)
       .fromTo('[data-anim="b-title"]', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .8 }, .12)
-      .fromTo('[data-anim="b-desc"]', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: .7 }, .3)
-      .fromTo('[data-anim="b-btn"]', { opacity: 0, y: 16, scale: .95 }, { opacity: 1, y: 0, scale: 1, duration: .6 }, .42);
-
-    const blossomLotus = document.getElementById('blossomLotus');
-    const blossomFigure = document.getElementById('blossomFigure');
-    const blossomPops = gsap.utils.toArray('[data-pop]');
+      .fromTo('[data-anim="b-desc"]', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: .7 }, .28)
+      .fromTo('[data-anim="b-btn"]', { opacity: 0, y: 16, scale: .95 }, { opacity: 1, y: 0, scale: 1, duration: .6 }, .4);
 
     if (blossomLotus) {
-      // final fanned-open angle + gentle color per petal (matches the CSS gradient already set)
+
       const petalTargets = [
-        { el: '.petal--0', rotate: 0,   z: 5 },
-        { el: '.petal--1', rotate: -26, z: 4 },
-        { el: '.petal--2', rotate: 26,  z: 4 },
-        { el: '.petal--3', rotate: -48, z: 3 },
-        { el: '.petal--4', rotate: 48,  z: 3 }
+        { el: '.petal--0', rotate: 0 },
+        { el: '.petal--1', rotate: -26 },
+        { el: '.petal--2', rotate: 26 },
+        { el: '.petal--3', rotate: -48 },
+        { el: '.petal--4', rotate: 48 }
       ];
 
       const bloomTl = gsap.timeline({
         scrollTrigger: {
           trigger: '#blossomFlower',
-          start: 'top 75%',
-          end: 'bottom 50%',
-          toggleActions: 'play reverse play reverse' // bloom open scrolling down, fold pale scrolling back up
+          start: 'top 60%',
+          end: 'bottom 40%',
+          toggleActions: 'play reverse play reverse'
         },
         defaults: { ease: 'back.out(1.5)' }
       });
 
-      // petals fan open from a closed, pale bud — center first, then outward pairs
+      // Petals fan open from a closed, pale bud — center first, then outward pairs
       petalTargets.forEach((p, i) => {
         bloomTl.to(p.el, {
           rotate: p.rotate,
           scaleY: 1,
           filter: 'grayscale(0%)',
           opacity: p.el === '.petal--0' ? 1 : (p.el.includes('1') || p.el.includes('2') ? .95 : .92),
-          duration: .9,
+          duration: 1.1,
           ease: 'back.out(1.7)'
-        }, i * .1);
+        }, i * .12);
       });
 
-      // the monk portrait rises into the bloomed center
+      // The monk portrait rises into the bloomed center (popup effect)
       bloomTl.to(blossomFigure, {
         opacity: 1,
         y: 0,
         scale: 1,
-        duration: .7,
+        duration: .85,
         ease: 'back.out(1.6)'
-      }, .35);
+      }, .4);
 
-      // photo accents pop up around the flower once it has opened
-      blossomPops.forEach((pop, i) => {
-        bloomTl.to(pop, {
-          opacity: 1,
-          scale: 1,
-          duration: .55,
-          ease: 'back.out(2.2)'
-        }, .6 + i * .12);
-      });
+      // When scroll back up, petals return automatically to closed state
+      // (ScrollTrigger toggleActions handles this)
     }
   }
 });

@@ -781,200 +781,240 @@ svg{ width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:2; st
 }
 
 /* ==========================================================================
-   BLOSSOM — section directly after wisdom
-   A radial photo-lotus that blooms open on scroll down and folds pale
-   (desaturated, collapsed) again on scroll back up.
-   ========================================================================== */
+BLOSSOM SECTION - LOTUS ONLY (CENTERED)
+========================================================================== */
 .blossom{
-  padding:130px 0 150px;
-  overflow:visible;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px 100px;
+    background: var(--cream);
 }
+
 .blossom__inner{
-  display:grid;
-  grid-template-columns:.92fr 1.08fr;
-  align-items:center;
-  gap:60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    gap: 32px;
 }
 
-/* ---- left copy ---- */
-.blossom__eyebrow{
-  display:block;
-  margin:0 0 14px;
-  font-family:var(--font-body);
-  font-size:13px;
-  font-weight:600;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-  color:var(--coral-dark);
+.blossom__copy{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-.blossom__title{
-  margin:0 0 22px;
-  font-family:var(--font-display);
-  font-weight:500;
-  font-size:clamp(34px, 4vw, 50px);
-  line-height:1.14;
-  color:var(--ink);
-}
-.blossom__desc{
-  margin:0 0 32px;
-  font-family:var(--font-body);
-  font-size:15.5px;
-  font-weight:500;
-  line-height:1.75;
-  color:var(--ink-soft);
-  max-width:40ch;
-}
-.blossom__btn{
-  display:inline-flex;
-  align-items:center;
-  gap:9px;
-  padding:15px 28px;
-  border-radius:999px;
-  background:var(--coral-dark);
-  color:#fff;
-  font-family:var(--font-body);
-  font-size:14px;
-  font-weight:600;
-  letter-spacing:.02em;
-  box-shadow:0 12px 24px -8px rgba(150,60,10,.4);
-  transition:transform .35s var(--ease), box-shadow .35s var(--ease), background .35s var(--ease);
-}
-.blossom__btn-icon{ width:14px; height:14px; fill:currentColor; stroke:none; }
-.blossom__btn:hover{
-  transform:translateY(-3px);
-  box-shadow:0 18px 30px -8px rgba(150,60,10,.48);
-  background:#b8481a;
-}
-.blossom__btn:active{ transform:translateY(-1px) scale(.98); }
 
-/* ---- right: radial photo lotus ---- */
+/* ---- radial photo lotus ---- */
 .blossom__flower{
-  position:relative;
-  width:100%;
-  max-width:460px;
-  aspect-ratio:1/1;
-  margin:0 auto;
+    position: relative;
+    width: 100%;
+    max-width: 760px;
+    aspect-ratio: 1/1;
+    margin: 0 auto;
+    overflow: hidden;
 }
 
 /* soft glow behind the bloom */
 .blossom__flower::before{
-  content:"";
-  position:absolute;
-  inset:6%;
-  border-radius:50%;
-  background:radial-gradient(circle, rgba(224,116,47,.35) 0%, rgba(224,116,47,0) 70%);
-  z-index:0;
+    content: "";
+    position: absolute;
+    inset: 8%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(224,116,47,.4) 0%, rgba(224,116,47,0) 70%);
+    z-index: 0;
+    pointer-events: none;
 }
 
-/* ---- the fanned lotus: 5 flame-shaped petals sharing one base point ---- */
+/* ---- the fanned lotus: 5 rounded, flat-colored petals sharing one base point ---- */
 .blossom__lotus{
-  position:absolute;
-  bottom:10%;
-  left:50%;
-  width:0; height:0;
-  z-index:1;
+    position: absolute;
+    bottom: 12%;
+    left: 50%;
+    width: 0; 
+    height: 0;
+    z-index: 1;
 }
+
 .petal{
-  position:absolute;
-  bottom:0; left:50%;
-  transform-origin:50% 100%;
-  clip-path:polygon(50% 0%, 66% 10%, 80% 33%, 82% 58%, 72% 82%, 60% 100%,
-                     40% 100%, 28% 82%, 18% 58%, 20% 33%, 34% 10%);
-  will-change:transform, filter, opacity;
-  box-shadow:0 12px 30px -14px rgba(120,50,10,.35);
+    position: absolute;
+    bottom: 0; 
+    left: 50%;
+    transform-origin: 50% 100%;
+    clip-path: polygon(
+        50% 0%, 62.36% 10%, 73.5% 20%, 82.36% 30%, 88.04% 40%, 90% 50%,
+        88.04% 60%, 82.36% 70%, 73.5% 80%, 62.36% 90%, 50% 100%,
+        37.64% 90%, 26.5% 80%, 17.64% 70%, 11.96% 60%, 10% 50%,
+        11.96% 40%, 17.64% 30%, 26.5% 20%, 37.64% 10%
+    );
+    will-change: transform, filter, opacity;
 }
+
+/* Petal 0 - Center (largest, deepest orange) */
 .petal--0{
-  width:126px; height:236px; margin-left:-63px;
-  z-index:5;
-  background:linear-gradient(180deg, #e6803a 0%, #d1652c 55%, #b84a1c 100%);
+    width: 300px; 
+    height: 480px; 
+    margin-left: -150px;
+    z-index: 5;
+    background: #e05f1c;
 }
+
+/* Petals 1 & 2 - Middle pair */
 .petal--1{
-  width:112px; height:208px; margin-left:-56px;
-  z-index:4;
-  background:linear-gradient(180deg, #eb9a5c 0%, #dd7638 100%);
+    width: 265px; 
+    height: 424px; 
+    margin-left: -132px;
+    z-index: 4;
+    background: #e8813f;
 }
+
 .petal--2{
-  width:112px; height:208px; margin-left:-56px;
-  z-index:4;
-  background:linear-gradient(180deg, #eb9a5c 0%, #dd7638 100%);
+    width: 265px; 
+    height: 424px; 
+    margin-left: -132px;
+    z-index: 4;
+    background: #e8813f;
 }
+
+/* Petals 3 & 4 - Outer pair (lightest) */
 .petal--3{
-  width:98px; height:178px; margin-left:-49px;
-  z-index:3;
-  background:linear-gradient(180deg, #f2b585 0%, #e69660 100%);
-  opacity:.92;
+    width: 225px; 
+    height: 360px; 
+    margin-left: -112px;
+    z-index: 3;
+    background: #f0ab7c;
 }
+
 .petal--4{
-  width:98px; height:178px; margin-left:-49px;
-  z-index:3;
-  background:linear-gradient(180deg, #f2b585 0%, #e69660 100%);
-  opacity:.92;
+    width: 225px; 
+    height: 360px; 
+    margin-left: -112px;
+    z-index: 3;
+    background: #f0ab7c;
 }
 
-/* closed-bud / paled resting state (before scroll bloom triggers) */
-.petal--0{ transform:rotate(0deg) scaleY(.22); filter:grayscale(100%); opacity:.5; }
-.petal--1{ transform:rotate(0deg) scaleY(.22); filter:grayscale(100%); opacity:.4; }
-.petal--2{ transform:rotate(0deg) scaleY(.22); filter:grayscale(100%); opacity:.4; }
-.petal--3{ transform:rotate(0deg) scaleY(.22); filter:grayscale(100%); opacity:.3; }
-.petal--4{ transform:rotate(0deg) scaleY(.22); filter:grayscale(100%); opacity:.3; }
+/* CLOSED STATE (default - pale, collapsed) */
+.petal--0{
+    transform: rotate(0deg) scaleY(.22);
+    filter: grayscale(100%);
+    opacity: .5;
+}
 
-/* the monk portrait — sits centered in front of the bloomed lotus */
+.petal--1{
+    transform: rotate(0deg) scaleY(.22);
+    filter: grayscale(100%);
+    opacity: .4;
+}
+
+.petal--2{
+    transform: rotate(0deg) scaleY(.22);
+    filter: grayscale(100%);
+    opacity: .4;
+}
+
+.petal--3{
+    transform: rotate(0deg) scaleY(.22);
+    filter: grayscale(100%);
+    opacity: .3;
+}
+
+.petal--4{
+    transform: rotate(0deg) scaleY(.22);
+    filter: grayscale(100%);
+    opacity: .3;
+}
+
+/* the monk portrait — sits big and centered, overlapping the bloomed lotus (NO FRAME) */
 .blossom__figure{
-  position:absolute;
-  bottom:10%; left:50%;
-  width:148px; height:206px;
-  margin-left:-74px;
-  z-index:6;
-  border-radius:50% 50% 10px 10px / 58% 58% 10px 10px;
-  overflow:hidden;
-  box-shadow:0 0 0 6px var(--cream), 0 22px 40px -14px rgba(120,50,10,.5);
-  opacity:0;
-  transform:translateY(24px) scale(.85);
+    position: absolute;
+    bottom: 8%;
+    left: 50%;
+    width: 320px;
+    height: 366px;
+    margin-left: -160px;
+    z-index: 6;
+    opacity: 0;
+    transform: translateY(32px) scale(.85);
 }
+
 .blossom__figure img{
-  width:100%; height:100%; object-fit:cover; object-position:50% 20%;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: 50% 100%;
 }
 
-/* small photo accents that "pop up" around the bloom once it opens */
-.blossom__pop{
-  position:absolute;
-  width:84px; height:84px;
-  border-radius:16px;
-  overflow:hidden;
-  z-index:7;
-  box-shadow:0 16px 30px -12px rgba(120,50,10,.45), 0 0 0 4px var(--cream);
-  opacity:0;
-  transform:scale(.3);
-}
-.blossom__pop img{ width:100%; height:100%; object-fit:cover; }
-.blossom__pop--1{ top:6%;  right:6%; }
-.blossom__pop--2{ top:38%; left:0%; }
-.blossom__pop--3{ bottom:14%; right:0%; width:70px; height:70px; }
-
-@media (max-width:1080px){
-  .blossom{ padding:100px 0; }
-  .blossom__inner{ gap:40px; }
-}
-
+/* ============================ RESPONSIVE ============================ */
 @media (max-width:860px){
-  .blossom__inner{
-    grid-template-columns:1fr;
-    text-align:center;
-  }
-  .blossom__desc{ margin-left:auto; margin-right:auto; }
-  .blossom__flower{ max-width:340px; margin-top:20px; }
-  .blossom__figure{ width:120px; height:168px; margin-left:-60px; }
-  .petal--0{ width:104px; height:196px; margin-left:-52px; }
-  .petal--1,.petal--2{ width:92px; height:172px; margin-left:-46px; }
-  .petal--3,.petal--4{ width:80px; height:148px; margin-left:-40px; }
-  .blossom__pop{ width:64px; height:64px; }
-  .blossom__pop--3{ width:54px; height:54px; }
+    .blossom{
+        padding: 60px 20px;
+    }
+    
+    .blossom__flower{
+        max-width: 540px;
+    }
+    
+    .petal--0{
+        width: 216px; 
+        height: 346px; 
+        margin-left: -108px;
+    }
+    
+    .petal--1, .petal--2{
+        width: 190px; 
+        height: 305px; 
+        margin-left: -95px;
+    }
+    
+    .petal--3, .petal--4{
+        width: 162px; 
+        height: 260px; 
+        margin-left: -81px;
+    }
+    
+    .blossom__figure{
+        width: 230px;
+        height: 263px;
+        margin-left: -115px;
+    }
 }
 
 @media (max-width:520px){
-  .blossom__flower{ max-width:280px; }
+    .blossom__flower{
+        max-width: 420px;
+    }
+    
+    .petal--0{
+        width: 175px; 
+        height: 280px; 
+        margin-left: -88px;
+    }
+    
+    .petal--1, .petal--2{
+        width: 154px; 
+        height: 246px; 
+        margin-left: -77px;
+    }
+    
+    .petal--3, .petal--4{
+        width: 130px; 
+        height: 210px; 
+        margin-left: -65px;
+    }
+    
+    .blossom__figure{
+        width: 186px;
+        height: 212px;
+        margin-left: -93px;
+    }
 }
 
 @media (prefers-reduced-motion: reduce){
-  .blossom__lotus .petal{ animation:none; }
+    .blossom__lotus .petal{
+        animation: none;
+    }
 }
